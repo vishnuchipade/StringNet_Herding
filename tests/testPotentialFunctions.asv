@@ -1,0 +1,33 @@
+
+
+%Test Potential func1tion and gradient
+
+alpha=0.5;
+c1=0.91;
+r0=10;
+rm=1;
+R_m_DD=1;
+R_m2_DD=10;
+Rjj0=5;
+x=0:0.1:R_m2_DD;
+
+% %V(x)=log((c1*x-c2)/(x-xm)+(x-xm)/(c1*x-c2));
+c1=(Rjj0-R_m_DD)/(R_m2_DD-Rjj0);
+c2=R_m2_DD*c1;      
+temp1=(c1^2-1)*x.^2-2*c1*c2*x+c2^2-R_m_DD^2+2*R_m_DD*x;
+temp2=(c1^2+1)*x.^2-2*c1*c2*x+c2^2+R_m_DD^2-2*R_m_DD*x;
+
+V=log((c1*x-c2)./(x-R_m_DD)+(x-R_m_DD)./(c1*x-c2));
+norm_nabla_V=1./x.*(-(c2-c1.*R_m_DD)./((R_m_DD-x).*(c1.*x-c2)).*temp1./temp2);
+x_star1=(c2+R_m_DD)/(c1+1)
+x_star2=(c2-R_m_DD)/(c1-1)
+
+figure
+plot(x,V,'b-',x,norm_nabla_V,'b--')
+hold on;
+
+%V1(x)=log(k/(x-x0)+(x-x0)/k) 
+x=0:0.1:50;
+V1=log(Rjj0./(x-R_m_DD)+(x-R_m_DD)./Rjj0);
+norm_nabla_V1=1./x./abs(x-R_m_DD).*((x-R_m_DD).^2-Rjj0^2)./((x-R_m_DD).^2+Rjj0^2); 
+plot(x,V1,'r-',x,norm_nabla_V1,'r--')
