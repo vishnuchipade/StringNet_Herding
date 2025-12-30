@@ -13,6 +13,7 @@ StringNet_Herding/
 ├── mainHerd.m # Core herding simulation
 ├── mainHerdGazebo.m # Gazebo-compatible simulation setup
 ├── mainHerdExperiments.m # Experimental demo setup
+├── setupPaths.m # Script to setup all paths
 │
 ├── config/
 │ ├── AllParameters.m
